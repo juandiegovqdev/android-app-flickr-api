@@ -1,1 +1,3 @@
-# android-app-flickr-api
+# Flickr-powered Android App
+### What's this?
+
