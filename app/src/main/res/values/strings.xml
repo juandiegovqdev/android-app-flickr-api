@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Flick-powered Android App</string>
+    <string name="type_image_keyword">Type image keyword…</string>
+    <string name="share">Share</string>
+</resources>
