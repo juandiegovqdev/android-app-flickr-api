@@ -121,10 +121,11 @@ public class MainActivity extends AppCompatActivity {
                         return false;
                     });
 
-                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(MainActivity.this, 2);
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(MainActivity.this, 1);
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setAdapter(fastAdapter);
                     recyclerView.setVisibility(View.VISIBLE);
+
                     progressBar.setVisibility(View.GONE);
                 }, throwable -> {
                     recyclerView.setVisibility(View.VISIBLE);
@@ -145,8 +146,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-    }
+    public void onBackPressed() { }
 
     @Override
     protected void onDestroy() {

@@ -20,10 +20,7 @@ public class ImageDetailsActivity extends AppCompatActivity {
     String author, title, description, url, link, date;
     ImageView imageView;
     ZoomableImageView fullScreenImg;
-    AppCompatTextView imageTitle;
-    AppCompatTextView imageDate;
-    AppCompatTextView imageAuthor;
-    AppCompatTextView imageDescription;
+    AppCompatTextView imageTitle, imageDate, imageAuthor, imageDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +46,11 @@ public class ImageDetailsActivity extends AppCompatActivity {
         if (id == R.id.share_button) {
             Intent myIntent = new Intent(Intent.ACTION_SEND);
             myIntent.setType("text/plain");
-            String body = "Hey! Check this image: " + url;
-            String sub = "What an image!";
+            String body = getString(R.string.share_body) + url;
+            String sub = getString(R.string.share_sub);
             myIntent.putExtra(Intent.EXTRA_SUBJECT, sub);
             myIntent.putExtra(Intent.EXTRA_TEXT, body);
-            startActivity(Intent.createChooser(myIntent, "Share Using"));
+            startActivity(Intent.createChooser(myIntent, getString(R.string.share_using)));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -87,6 +84,14 @@ public class ImageDetailsActivity extends AppCompatActivity {
         });
     }
 
+    public void initializeData() {
+        Picasso.get().load(url).into(imageView);
+        imageTitle.setText(title);
+        imageAuthor.setText(author);
+        imageDate.setText(date);
+        imageDescription.setText(description);
+    }
+
     public void hideFullScreenImg(View view) {
         view.setVisibility(View.GONE);
         try {
@@ -94,13 +99,5 @@ public class ImageDetailsActivity extends AppCompatActivity {
         } catch (NullPointerException npe) {
             npe.printStackTrace();
         }
-    }
-
-    public void initializeData() {
-        Picasso.get().load(url).into(imageView);
-        imageTitle.setText(title);
-        imageAuthor.setText(author);
-        imageDate.setText(date);
-        imageDescription.setText(description);
     }
 }

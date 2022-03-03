@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.juandiegovqdev.flickrandroidapp.R;
 import com.juandiegovqdev.flickrandroidapp.utils.DeviceData;
@@ -49,17 +50,23 @@ public class Item extends AbstractItem<Item, Item.ViewHolder> {
     @Override
     public void bindView(Item.ViewHolder holder, List<Object> payloads) {
         super.bindView(holder, payloads);
-        Picasso.get().load(media.m).into(holder.img);
+        Picasso.get().load(media.m).into(holder.imageView);
+        holder.titleTv.setText(title);
+        holder.authorTv.setText(author);
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView img;
+        ImageView imageView;
+        TextView titleTv;
+        TextView authorTv;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            img = itemView.findViewById(R.id.img);
-            img.getLayoutParams().width = DeviceData.getInstance().getDisplayWidth() / 2;
-            img.getLayoutParams().height = DeviceData.getInstance().getDisplayWidth() / 2;
+            imageView = itemView.findViewById(R.id.img);
+            titleTv = itemView.findViewById(R.id.title);
+            authorTv = itemView.findViewById(R.id.author);
+            imageView.getLayoutParams().width = DeviceData.getInstance().getDisplayWidth() / 2;
+            imageView.getLayoutParams().height = DeviceData.getInstance().getDisplayWidth() / 2;
         }
     }
 }
