@@ -7,9 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.juandiegovqdev.flickrandroidapp.R;
+import com.juandiegovqdev.flickrandroidapp.views.ZoomableImageView;
 import com.squareup.picasso.Picasso;
 
 public class ImageDetailsActivity extends AppCompatActivity {
@@ -17,6 +19,7 @@ public class ImageDetailsActivity extends AppCompatActivity {
     Context context;
     String author, title, description, url, link, date;
     ImageView imageView;
+    ZoomableImageView fullScreenImg;
     AppCompatTextView imageTitle;
     AppCompatTextView imageDate;
     AppCompatTextView imageAuthor;
@@ -31,6 +34,7 @@ public class ImageDetailsActivity extends AppCompatActivity {
         initializeUI();
         initializeIntents();
         initializeData();
+        initializeListeners();
     }
 
     @Override
@@ -63,6 +67,7 @@ public class ImageDetailsActivity extends AppCompatActivity {
         imageTitle = findViewById(R.id.image_title);
         imageDate = findViewById(R.id.image_date);
         imageAuthor = findViewById(R.id.image_author);
+        fullScreenImg = findViewById(R.id.full_screen_img);
         imageDescription = findViewById(R.id.image_description);
     }
 
@@ -73,6 +78,22 @@ public class ImageDetailsActivity extends AppCompatActivity {
         link = getIntent().getStringExtra("link");
         title = getIntent().getStringExtra("title");
         url = getIntent().getStringExtra("url");
+    }
+
+    public void initializeListeners() {
+        imageView.setOnClickListener(view -> {
+            fullScreenImg.setVisibility(View.VISIBLE);
+            Picasso.get().load(url).into(fullScreenImg);
+        });
+    }
+
+    public void hideFullScreenImg(View view) {
+        view.setVisibility(View.GONE);
+        try {
+            getSupportActionBar().show();
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+        }
     }
 
     public void initializeData() {
