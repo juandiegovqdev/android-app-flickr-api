@@ -120,12 +120,10 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(imageDetailsIntent);
                         return false;
                     });
-
                     RecyclerView.LayoutManager layoutManager = new GridLayoutManager(MainActivity.this, 1);
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setAdapter(fastAdapter);
                     recyclerView.setVisibility(View.VISIBLE);
-
                     progressBar.setVisibility(View.GONE);
                 }, throwable -> {
                     recyclerView.setVisibility(View.VISIBLE);
